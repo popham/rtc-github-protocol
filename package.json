@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf node/* & rm -rf amd/* & wait",
+    "clean": "rm -rf node/*.js & rm -rf amd/*.js & wait",
     "capnp": "capnpc -ojs *.capnp",
     "nodefy": "for i in $(ls *.capnp.d/*.js); do nodefy --output=node/$(dirname $i) $i; done",
     "amd": "for i in $(ls -d *.capnp.d); do cp -r $i amd; done",
