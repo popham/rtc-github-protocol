@@ -1,4 +1,4 @@
-define(['./bTypes', '../client.capnp.d/bTypes', '../user.capnp.d/bTypes'], function(types, file0, file1) {
+define(['./bTypes', '../peer.capnp.d/bTypes', '../user.capnp.d/bTypes'], function(types, file0, file1) {
     var scope = {};
     var id;
     for (id in file0) {

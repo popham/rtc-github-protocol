@@ -1,7 +1,7 @@
 @0xf1debd61db8d2044;
 
 using import "user.capnp".User;
-using import "client.capnp".Peer;
+using import "peer.capnp".Peer;
 
 struct Server {
     union {

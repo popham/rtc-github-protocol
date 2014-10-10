@@ -1,5 +1,5 @@
 var types = require('./bTypes');
-var file0 = require('../client.capnp.d/bTypes');
+var file0 = require('../peer.capnp.d/bTypes');
 var file1 = require('../user.capnp.d/bTypes');
     var scope = {};
     var id;
