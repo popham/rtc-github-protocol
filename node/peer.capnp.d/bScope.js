@@ -1,11 +1,8 @@
 var types = require('./bTypes');
 var file0 = require('../user.capnp.d/bTypes');
     var scope = {};
-    var id;
-    for (id in file0) {
-        scope[id] = file0[id];
-    }
-    for (id in types) {
+    for (var id in types) {
         scope[id] = types[id];
     }
+    scope["0x95570979dae93deb"] = file0["0x95570979dae93deb"];
     module.exports = scope;

@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf node/*.js & rm -rf amd/*.js & wait",
+    "clean": "rm -rf node/*.js amd/*.js amd/*/ *.capnp.d/",
     "capnp": "capnpc -ojs *.capnp",
     "nodefy": "for i in $(ls *.capnp.d/*.js); do nodefy --output=node/$(dirname $i) $i; done",
     "amd": "for i in $(ls -d *.capnp.d); do cp -r $i amd; done",
-    "build": "npm run clean && npm run capnp && (npm run nodefy & npm run amd & wait)"
+    "build": "npm run rebuild",
+    "rebuild": "npm run clean && npm run capnp && (npm run nodefy & npm run amd & wait)"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
   },
   "homepage": "https://github.com/popham/rtc-github-protocol",
   "devDependencies": {
-    "capnp-js-plugin": "0.0.8",
+    "capnp-js-plugin": "0.0.10",
     "nodefy": "^0.2.2"
   }
 }
