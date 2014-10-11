@@ -6,8 +6,8 @@
   "scripts": {
     "clean": "rm -rf node/*.js amd/*.js amd/*/ *.capnp.d/",
     "capnp": "capnpc -ojs *.capnp",
-    "nodefy": "for i in $(ls *.capnp.d/*.js); do nodefy --output=node/$(dirname $i) $i; done",
-    "amd": "for i in $(ls -d *.capnp.d); do cp -r $i amd; done",
+    "nodefy": "for i in $(ls *.capnp.d/*.js); do nodefy --output=node/$(dirname $i) $i; done & cp *.capnp node & wait",
+    "amd": "for i in $(ls -d *.capnp.d); do cp -r $i amd; done & cp *.capnp amd & wait",
     "build": "npm run rebuild",
     "rebuild": "npm run clean && npm run capnp && (npm run nodefy & npm run amd & wait)"
   },
