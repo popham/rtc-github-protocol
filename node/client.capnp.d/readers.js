@@ -2,6 +2,7 @@ var Allocator = require('capnp-js/builder/Allocator');
 var reader = require('capnp-js/reader/index');
 var scope = require('./rScope');
 var constants = require('./constants');
+var file0 = require('../peer.capnp.d/readers');
     var readers = {};
     var allocator = new Allocator();
     readers.Client = (function() {
