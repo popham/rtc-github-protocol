@@ -7,6 +7,7 @@ var file0 = require('../user.capnp.d/builders');
 var file1 = require('../peer.capnp.d/builders');
     var builders = {};
     var allocator = new Allocator();
+    builders.EMPTY_HOSTS_UPDATE = readers.EMPTY_HOSTS_UPDATE;
     builders.Server = (function() {
         var Structure = scope["0x898617f522cfa2ab"];
         Structure.prototype.which = function() {

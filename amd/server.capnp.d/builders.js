@@ -1,6 +1,7 @@
 define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './readers', '../user.capnp.d/builders', '../peer.capnp.d/builders'], function(Allocator, builder, reader, scope, readers, file0, file1) {
     var builders = {};
     var allocator = new Allocator();
+    builders.EMPTY_HOSTS_UPDATE = readers.EMPTY_HOSTS_UPDATE;
     builders.Server = (function() {
         var Structure = scope["0x898617f522cfa2ab"];
         Structure.prototype.which = function() {
