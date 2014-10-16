@@ -109,12 +109,12 @@ var file1 = require('../peer.capnp.d/builders');
             return Builder_hostsUpdate._init(this._arena, pointer, n);
         };
         Structure.prototype.setHostsUpdate = function(value) {
+            this._setWhich(1);
             var pointer = {
                 segment: this._segment,
                 position: this._pointersSection + 0
             };
             Builder_hostsUpdate._set(this._arena, pointer, value);
-            this._setWhich(1);
         };
         Structure.prototype.getHostsUpdate = function() {
             if (!this.isHostsUpdate()) {
@@ -150,12 +150,12 @@ var file1 = require('../peer.capnp.d/builders');
             return Builder_peer._init(this._arena, pointer, this._depth + 1);
         };
         Structure.prototype.setPeer = function(value) {
+            this._setWhich(2);
             var pointer = {
                 segment: this._segment,
                 position: this._pointersSection + 0
             };
             Builder_peer._set(this._arena, pointer, value);
-            this._setWhich(2);
         };
         Structure.prototype.adoptPeer = function(value) {
             if (Builder_peer._TYPE !== value._TYPE) {
