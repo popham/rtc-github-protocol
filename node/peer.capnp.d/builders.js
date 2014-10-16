@@ -22,6 +22,9 @@ var file0 = require('../user.capnp.d/builders');
                 return builder.Text._deref(this._arena, pointer);
             };
             Structure.prototype.setCandidate = function(value) {
+                if (builder.Text._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 0
@@ -36,6 +39,9 @@ var file0 = require('../user.capnp.d/builders');
                 return (!reader.isNull(pointer));
             };
             Structure.prototype.adoptCandidate = function(value) {
+                if (builder.Text._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 builder.Text._adopt(this._arena, {
                     segment: this._segment,
                     position: this._pointersSection + 0
@@ -123,6 +129,9 @@ var file0 = require('../user.capnp.d/builders');
                 return Builder_user._init(this._arena, pointer, this._depth + 1);
             };
             Structure.prototype.setUser = function(value) {
+                if (Builder_user._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 this._setWhich(1);
                 var pointer = {
                     segment: this._segment,
@@ -134,12 +143,16 @@ var file0 = require('../user.capnp.d/builders');
                 if (Builder_user._TYPE !== value._TYPE) {
                     throw new TypeError();
                 }
+                this._setWhich(1);
                 Builder_user._adopt(this._arena, {
                     segment: this._segment,
                     position: this._pointersSection + 0
                 }, value);
             };
             Structure.prototype.disownUser = function() {
+                if (!this.isUser()) {
+                    throw new Error("Attempted to access an inactive union member");
+                }
                 var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 0
@@ -246,6 +259,9 @@ var file0 = require('../user.capnp.d/builders');
                 return builder.Text._deref(this._arena, pointer);
             };
             Structure.prototype.setSdp = function(value) {
+                if (builder.Text._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 8
@@ -260,6 +276,9 @@ var file0 = require('../user.capnp.d/builders');
                 return (!reader.isNull(pointer));
             };
             Structure.prototype.adoptSdp = function(value) {
+                if (builder.Text._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 builder.Text._adopt(this._arena, {
                     segment: this._segment,
                     position: this._pointersSection + 8
@@ -309,6 +328,9 @@ var file0 = require('../user.capnp.d/builders');
                 return builder.Text._deref(this._arena, pointer);
             };
             Structure.prototype.setSdp = function(value) {
+                if (builder.Text._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 8
@@ -323,6 +345,9 @@ var file0 = require('../user.capnp.d/builders');
                 return (!reader.isNull(pointer));
             };
             Structure.prototype.adoptSdp = function(value) {
+                if (builder.Text._TYPE !== value._TYPE) {
+                    throw new TypeError();
+                }
                 builder.Text._adopt(this._arena, {
                     segment: this._segment,
                     position: this._pointersSection + 8
@@ -369,6 +394,9 @@ var file0 = require('../user.capnp.d/builders');
             return Builder_ice._init(this._arena, pointer, this._depth + 1);
         };
         Structure.prototype.setIce = function(value) {
+            if (Builder_ice._TYPE !== value._TYPE) {
+                throw new TypeError();
+            }
             this._setWhich(2);
             var pointer = {
                 segment: this._segment,
@@ -380,12 +408,16 @@ var file0 = require('../user.capnp.d/builders');
             if (Builder_ice._TYPE !== value._TYPE) {
                 throw new TypeError();
             }
+            this._setWhich(2);
             Builder_ice._adopt(this._arena, {
                 segment: this._segment,
                 position: this._pointersSection + 8
             }, value);
         };
         Structure.prototype.disownIce = function() {
+            if (!this.isIce()) {
+                throw new Error("Attempted to access an inactive union member");
+            }
             var pointer = {
                 segment: this._segment,
                 position: this._pointersSection + 8

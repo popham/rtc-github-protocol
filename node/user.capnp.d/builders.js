@@ -25,6 +25,9 @@ var readers = require('./readers');
             return builder.Text._deref(this._arena, pointer);
         };
         Structure.prototype.setName = function(value) {
+            if (builder.Text._TYPE !== value._TYPE) {
+                throw new TypeError();
+            }
             var pointer = {
                 segment: this._segment,
                 position: this._pointersSection + 0
@@ -39,6 +42,9 @@ var readers = require('./readers');
             return (!reader.isNull(pointer));
         };
         Structure.prototype.adoptName = function(value) {
+            if (builder.Text._TYPE !== value._TYPE) {
+                throw new TypeError();
+            }
             builder.Text._adopt(this._arena, {
                 segment: this._segment,
                 position: this._pointersSection + 0
