@@ -1,15 +1,14 @@
 {
   "name": "rtc-github-protocol",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Signaling protocol for rtc-github",
   "scripts": {
     "clean": "rm -rf node/*.js amd/*.js amd/*/ *.capnp.d/",
-    "capnp": "capnpc -ojs *.capnp",
+    "compileMySchema": "capnp compile -ojs *.capnp",
     "nodefy": "for i in $(ls *.capnp.d/*.js); do nodefy --output=node/$(dirname $i) $i; done & cp *.capnp node & wait",
     "amd": "for i in $(ls -d *.capnp.d); do cp -r $i amd; done & cp *.capnp amd & wait",
     "build": "npm run rebuild",
-    "rebuild": "npm run clean && npm run capnp && (npm run nodefy & npm run amd & wait)"
+    "rebuild": "npm run clean && npm run compileMySchema && (npm run nodefy & npm run amd & wait)"
   },
   "repository": {
     "type": "git",
