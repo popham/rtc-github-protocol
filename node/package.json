@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/popham/rtc-github-protocol/issues"
   },
-  "homepage": "https://github.com/popham/rtc-github-protocol"
+  "homepage": "https://github.com/popham/rtc-github-protocol",
+  "dependencies": {
+    "capnp-js": "0.0.24"
+  }
 }
