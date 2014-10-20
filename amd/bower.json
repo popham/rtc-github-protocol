@@ -8,5 +8,8 @@
   "moduleType": [
     "amd"
   ],
-  "private": true
+  "private": true,
+  "dependencies": {
+    "capnp-js": "~0.1.0"
+  }
 }
