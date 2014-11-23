@@ -35,10 +35,18 @@ var file1 = require('../peer.capnp.d/builders');
                 };
                 return Builder_user._init(this._arena, pointer, this._depth + 1);
             };
-            Structure.prototype.setUser = function(value) {
-                if (Builder_user._TYPE !== value._TYPE) {
-                    throw new TypeError();
+            Structure.prototype.getUser = function() {
+                var pointer = {
+                    segment: this._segment,
+                    position: this._pointersSection + 0
+                };
+                if (reader.isNull(pointer)) {
+                    builder.copy.pointer.setStructPointer(this._defaults.user._arena, this._defaults.user._layout(), this._arena, pointer);
                 }
+                return Builder_user._deref(this._arena, pointer);
+            };
+            Structure.prototype.setUser = function(value) {
+                if (Builder_user._TYPE !== value._TYPE) throw new TypeError();
                 var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 0
@@ -46,13 +54,13 @@ var file1 = require('../peer.capnp.d/builders');
                 Builder_user._set(this._arena, pointer, value);
             };
             Structure.prototype.adoptUser = function(value) {
-                if (Builder_user._TYPE !== value._TYPE) {
-                    throw new TypeError();
-                }
-                Builder_user._adopt(this._arena, {
+                if (Builder_user._TYPE !== value._TYPE) throw new TypeError();
+                if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
+                var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 0
-                }, value);
+                };
+                Builder_user._adopt(this._arena, pointer, value);
             };
             Structure.prototype.disownUser = function() {
                 var pointer = {
@@ -64,19 +72,19 @@ var file1 = require('../peer.capnp.d/builders');
                 } else {
                     var instance = Builder_user._deref(this._arena, pointer);
                     this._arena._zero(pointer, 8);
-                    instance._isDisowned = true;
+                    instance._isOrphan = true;
                     return instance;
                 }
             };
-            Structure.prototype.getUser = function() {
+            Structure.prototype.disownAsReaderUser = function() {
                 var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 0
                 };
-                if (reader.isNull(pointer)) {
-                    builder.copy.pointer.deep(this._defaults.user, this._arena, pointer);
-                }
-                return Builder_user._deref(this._arena, pointer);
+                var instance = Builder_user._READER._deref(this._arena, pointer);
+                this._arena._zero(pointer, 8);
+                instance._isOrphan = true;
+                return instance;
             };
             Structure.prototype.hasUser = function() {
                 var pointer = {
@@ -111,17 +119,6 @@ var file1 = require('../peer.capnp.d/builders');
             };
             return Builder_hostsUpdate._init(this._arena, pointer, n);
         };
-        Structure.prototype.setHostsUpdate = function(value) {
-            if (Builder_hostsUpdate._TYPE !== value._TYPE) {
-                throw new TypeError();
-            }
-            this._setWhich(1);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            Builder_hostsUpdate._set(this._arena, pointer, value);
-        };
         Structure.prototype.getHostsUpdate = function() {
             if (!this.isHostsUpdate()) {
                 throw new Error("Attempted to access an inactive union member");
@@ -131,9 +128,58 @@ var file1 = require('../peer.capnp.d/builders');
                 position: this._pointersSection + 0
             };
             if (reader.isNull(pointer)) {
-                builder.copy.pointer.deep(this._defaults.hostsUpdate, this._arena, pointer);
+                builder.copy.pointer.setListPointer(this._defaults.hostsUpdate._arena, this._defaults.hostsUpdate._layout(), this._arena, pointer);
             }
             return Builder_hostsUpdate._deref(this._arena, pointer);
+        };
+        Structure.prototype.setHostsUpdate = function(value) {
+            if (Builder_hostsUpdate._TYPE !== value._TYPE) throw new TypeError();
+            this._setWhich(1);
+            var pointer = {
+                segment: this._segment,
+                position: this._pointersSection + 0
+            };
+            Builder_hostsUpdate._set(this._arena, pointer, value);
+        };
+        Structure.prototype.adoptHostsUpdate = function(value) {
+            if (Builder_hostsUpdate._TYPE !== value._TYPE) throw new TypeError();
+            if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
+            this._setWhich(1);
+            var pointer = {
+                segment: this._segment,
+                position: this._pointersSection + 0
+            };
+            Builder_hostsUpdate._adopt(this._arena, pointer, value);
+        };
+        Structure.prototype.disownHostsUpdate = function() {
+            if (!this.isHostsUpdate()) {
+                throw new Error("Attempted to access an inactive union member");
+            }
+            var pointer = {
+                segment: this._segment,
+                position: this._pointersSection + 0
+            };
+            if (reader.isNull(pointer)) {
+                return Builder_hostsUpdate._initOrphan(this._arena);
+            } else {
+                var instance = Builder_hostsUpdate._deref(this._arena, pointer);
+                this._arena._zero(pointer, 8);
+                instance._isOrphan = true;
+                return instance;
+            }
+        };
+        Structure.prototype.disownAsReaderHostsUpdate = function() {
+            if (!this.isHostsUpdate()) {
+                throw new Error("Attempted to access an inactive union member");
+            }
+            var pointer = {
+                segment: this._segment,
+                position: this._pointersSection + 0
+            };
+            var instance = Builder_hostsUpdate._READER._deref(this._arena, pointer);
+            this._arena._zero(pointer, 8);
+            instance._isOrphan = true;
+            return instance;
         };
         Structure.prototype.hasHostsUpdate = function() {
             var pointer = {
@@ -155,10 +201,21 @@ var file1 = require('../peer.capnp.d/builders');
             };
             return Builder_peer._init(this._arena, pointer, this._depth + 1);
         };
-        Structure.prototype.setPeer = function(value) {
-            if (Builder_peer._TYPE !== value._TYPE) {
-                throw new TypeError();
+        Structure.prototype.getPeer = function() {
+            if (!this.isPeer()) {
+                throw new Error("Attempted to access an inactive union member");
             }
+            var pointer = {
+                segment: this._segment,
+                position: this._pointersSection + 0
+            };
+            if (reader.isNull(pointer)) {
+                builder.copy.pointer.setStructPointer(this._defaults.peer._arena, this._defaults.peer._layout(), this._arena, pointer);
+            }
+            return Builder_peer._deref(this._arena, pointer);
+        };
+        Structure.prototype.setPeer = function(value) {
+            if (Builder_peer._TYPE !== value._TYPE) throw new TypeError();
             this._setWhich(2);
             var pointer = {
                 segment: this._segment,
@@ -167,14 +224,14 @@ var file1 = require('../peer.capnp.d/builders');
             Builder_peer._set(this._arena, pointer, value);
         };
         Structure.prototype.adoptPeer = function(value) {
-            if (Builder_peer._TYPE !== value._TYPE) {
-                throw new TypeError();
-            }
+            if (Builder_peer._TYPE !== value._TYPE) throw new TypeError();
+            if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
             this._setWhich(2);
-            Builder_peer._adopt(this._arena, {
+            var pointer = {
                 segment: this._segment,
                 position: this._pointersSection + 0
-            }, value);
+            };
+            Builder_peer._adopt(this._arena, pointer, value);
         };
         Structure.prototype.disownPeer = function() {
             if (!this.isPeer()) {
@@ -189,11 +246,11 @@ var file1 = require('../peer.capnp.d/builders');
             } else {
                 var instance = Builder_peer._deref(this._arena, pointer);
                 this._arena._zero(pointer, 8);
-                instance._isDisowned = true;
+                instance._isOrphan = true;
                 return instance;
             }
         };
-        Structure.prototype.getPeer = function() {
+        Structure.prototype.disownAsReaderPeer = function() {
             if (!this.isPeer()) {
                 throw new Error("Attempted to access an inactive union member");
             }
@@ -201,10 +258,10 @@ var file1 = require('../peer.capnp.d/builders');
                 segment: this._segment,
                 position: this._pointersSection + 0
             };
-            if (reader.isNull(pointer)) {
-                builder.copy.pointer.deep(this._defaults.peer, this._arena, pointer);
-            }
-            return Builder_peer._deref(this._arena, pointer);
+            var instance = Builder_peer._READER._deref(this._arena, pointer);
+            this._arena._zero(pointer, 8);
+            instance._isOrphan = true;
+            return instance;
         };
         Structure.prototype.hasPeer = function() {
             var pointer = {

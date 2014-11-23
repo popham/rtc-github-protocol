@@ -28,11 +28,8 @@ var constants = require('./constants');
         Structure.prototype._defaults = {
             name: (function() {
                 var Reader = reader.Text;
-                var arena = allocator._fromBase64("AQAAAAoAAAAAAAAAAAAAAA==").asReader();
-                return Reader._deref(arena, {
-                    segment: arena.getSegment(0),
-                    position: 0
-                }, 0);
+                var arena = allocator._fromBase64("AQAAAAMAAAA=").asReader();
+                return Reader._deref(arena, arena._root(), 0);
             })()
         };
         return Structure;

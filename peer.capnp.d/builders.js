@@ -12,7 +12,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     position: this._pointersSection + 0
                 };
                 if (reader.isNull(pointer)) {
-                    builder.copy.pointer.deep(this._defaults.candidate, this._arena, pointer);
+                    builder.copy.pointer.setListPointer(this._defaults.candidate._arena, this._defaults.candidate._layout(), this._arena, pointer);
                 }
                 return builder.Text._deref(this._arena, pointer);
             };
@@ -23,6 +23,13 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     position: this._pointersSection + 0
                 };
                 builder.Text._set(this._arena, pointer, params);
+            };
+            Structure.prototype.initCandidate = function(n) {
+                var pointer = {
+                    segment: this._segment,
+                    position: this._pointersSection + 0
+                };
+                return builder.Text._init(this._arena, pointer, n + 1);
             };
             Structure.prototype.hasCandidate = function() {
                 var pointer = {
@@ -121,10 +128,21 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                 };
                 return Builder_user._init(this._arena, pointer, this._depth + 1);
             };
-            Structure.prototype.setUser = function(value) {
-                if (Builder_user._TYPE !== value._TYPE) {
-                    throw new TypeError();
+            Structure.prototype.getUser = function() {
+                if (!this.isUser()) {
+                    throw new Error("Attempted to access an inactive union member");
                 }
+                var pointer = {
+                    segment: this._segment,
+                    position: this._pointersSection + 0
+                };
+                if (reader.isNull(pointer)) {
+                    builder.copy.pointer.setStructPointer(this._defaults.user._arena, this._defaults.user._layout(), this._arena, pointer);
+                }
+                return Builder_user._deref(this._arena, pointer);
+            };
+            Structure.prototype.setUser = function(value) {
+                if (Builder_user._TYPE !== value._TYPE) throw new TypeError();
                 this._setWhich(1);
                 var pointer = {
                     segment: this._segment,
@@ -133,14 +151,14 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                 Builder_user._set(this._arena, pointer, value);
             };
             Structure.prototype.adoptUser = function(value) {
-                if (Builder_user._TYPE !== value._TYPE) {
-                    throw new TypeError();
-                }
+                if (Builder_user._TYPE !== value._TYPE) throw new TypeError();
+                if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
                 this._setWhich(1);
-                Builder_user._adopt(this._arena, {
+                var pointer = {
                     segment: this._segment,
                     position: this._pointersSection + 0
-                }, value);
+                };
+                Builder_user._adopt(this._arena, pointer, value);
             };
             Structure.prototype.disownUser = function() {
                 if (!this.isUser()) {
@@ -155,11 +173,11 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                 } else {
                     var instance = Builder_user._deref(this._arena, pointer);
                     this._arena._zero(pointer, 8);
-                    instance._isDisowned = true;
+                    instance._isOrphan = true;
                     return instance;
                 }
             };
-            Structure.prototype.getUser = function() {
+            Structure.prototype.disownAsReaderUser = function() {
                 if (!this.isUser()) {
                     throw new Error("Attempted to access an inactive union member");
                 }
@@ -167,10 +185,10 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     segment: this._segment,
                     position: this._pointersSection + 0
                 };
-                if (reader.isNull(pointer)) {
-                    builder.copy.pointer.deep(this._defaults.user, this._arena, pointer);
-                }
-                return Builder_user._deref(this._arena, pointer);
+                var instance = Builder_user._READER._deref(this._arena, pointer);
+                this._arena._zero(pointer, 8);
+                instance._isOrphan = true;
+                return instance;
             };
             Structure.prototype.hasUser = function() {
                 var pointer = {
@@ -247,7 +265,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     position: this._pointersSection + 8
                 };
                 if (reader.isNull(pointer)) {
-                    builder.copy.pointer.deep(this._defaults.sdp, this._arena, pointer);
+                    builder.copy.pointer.setListPointer(this._defaults.sdp._arena, this._defaults.sdp._layout(), this._arena, pointer);
                 }
                 return builder.Text._deref(this._arena, pointer);
             };
@@ -258,6 +276,13 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     position: this._pointersSection + 8
                 };
                 builder.Text._set(this._arena, pointer, params);
+            };
+            Structure.prototype.initSdp = function(n) {
+                var pointer = {
+                    segment: this._segment,
+                    position: this._pointersSection + 8
+                };
+                return builder.Text._init(this._arena, pointer, n + 1);
             };
             Structure.prototype.hasSdp = function() {
                 var pointer = {
@@ -314,7 +339,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     position: this._pointersSection + 8
                 };
                 if (reader.isNull(pointer)) {
-                    builder.copy.pointer.deep(this._defaults.sdp, this._arena, pointer);
+                    builder.copy.pointer.setListPointer(this._defaults.sdp._arena, this._defaults.sdp._layout(), this._arena, pointer);
                 }
                 return builder.Text._deref(this._arena, pointer);
             };
@@ -325,6 +350,13 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                     position: this._pointersSection + 8
                 };
                 builder.Text._set(this._arena, pointer, params);
+            };
+            Structure.prototype.initSdp = function(n) {
+                var pointer = {
+                    segment: this._segment,
+                    position: this._pointersSection + 8
+                };
+                return builder.Text._init(this._arena, pointer, n + 1);
             };
             Structure.prototype.hasSdp = function() {
                 var pointer = {
@@ -382,10 +414,21 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
             };
             return Builder_ice._init(this._arena, pointer, this._depth + 1);
         };
-        Structure.prototype.setIce = function(value) {
-            if (Builder_ice._TYPE !== value._TYPE) {
-                throw new TypeError();
+        Structure.prototype.getIce = function() {
+            if (!this.isIce()) {
+                throw new Error("Attempted to access an inactive union member");
             }
+            var pointer = {
+                segment: this._segment,
+                position: this._pointersSection + 8
+            };
+            if (reader.isNull(pointer)) {
+                builder.copy.pointer.setStructPointer(this._defaults.ice._arena, this._defaults.ice._layout(), this._arena, pointer);
+            }
+            return Builder_ice._deref(this._arena, pointer);
+        };
+        Structure.prototype.setIce = function(value) {
+            if (Builder_ice._TYPE !== value._TYPE) throw new TypeError();
             this._setWhich(2);
             var pointer = {
                 segment: this._segment,
@@ -394,14 +437,14 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
             Builder_ice._set(this._arena, pointer, value);
         };
         Structure.prototype.adoptIce = function(value) {
-            if (Builder_ice._TYPE !== value._TYPE) {
-                throw new TypeError();
-            }
+            if (Builder_ice._TYPE !== value._TYPE) throw new TypeError();
+            if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
             this._setWhich(2);
-            Builder_ice._adopt(this._arena, {
+            var pointer = {
                 segment: this._segment,
                 position: this._pointersSection + 8
-            }, value);
+            };
+            Builder_ice._adopt(this._arena, pointer, value);
         };
         Structure.prototype.disownIce = function() {
             if (!this.isIce()) {
@@ -416,11 +459,11 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
             } else {
                 var instance = Builder_ice._deref(this._arena, pointer);
                 this._arena._zero(pointer, 8);
-                instance._isDisowned = true;
+                instance._isOrphan = true;
                 return instance;
             }
         };
-        Structure.prototype.getIce = function() {
+        Structure.prototype.disownAsReaderIce = function() {
             if (!this.isIce()) {
                 throw new Error("Attempted to access an inactive union member");
             }
@@ -428,10 +471,10 @@ define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader
                 segment: this._segment,
                 position: this._pointersSection + 8
             };
-            if (reader.isNull(pointer)) {
-                builder.copy.pointer.deep(this._defaults.ice, this._arena, pointer);
-            }
-            return Builder_ice._deref(this._arena, pointer);
+            var instance = Builder_ice._READER._deref(this._arena, pointer);
+            this._arena._zero(pointer, 8);
+            instance._isOrphan = true;
+            return instance;
         };
         Structure.prototype.hasIce = function() {
             var pointer = {

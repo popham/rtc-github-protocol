@@ -69,10 +69,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', './co
             peer: (function() {
                 var Reader = scope["0xe5e90b52fd6c402e"];
                 var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
-                return Reader._deref(arena, {
-                    segment: arena.getSegment(0),
-                    position: 0
-                }, 0);
+                return Reader._deref(arena, arena._root(), 0);
             })()
         };
         return Structure;

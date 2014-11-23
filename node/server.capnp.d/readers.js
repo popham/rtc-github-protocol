@@ -48,10 +48,7 @@ var file1 = require('../peer.capnp.d/readers');
                 user: (function() {
                     var Reader = scope["0x95570979dae93deb"];
                     var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
-                    return Reader._deref(arena, {
-                        segment: arena.getSegment(0),
-                        position: 0
-                    }, 0);
+                    return Reader._deref(arena, arena._root(), 0);
                 })()
             };
             return Structure;
@@ -128,18 +125,12 @@ var file1 = require('../peer.capnp.d/readers');
             hostsUpdate: (function() {
                 var Reader = reader.lists.structure(scope['0x95570979dae93deb']);
                 var arena = allocator._fromBase64("AQAAAAAAAAA=").asReader();
-                return Reader._deref(arena, {
-                    segment: arena.getSegment(0),
-                    position: 0
-                }, 0);
+                return Reader._deref(arena, arena._root(), 0);
             })(),
             peer: (function() {
                 var Reader = scope["0xe5e90b52fd6c402e"];
                 var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
-                return Reader._deref(arena, {
-                    segment: arena.getSegment(0),
-                    position: 0
-                }, 0);
+                return Reader._deref(arena, arena._root(), 0);
             })()
         };
         return Structure;

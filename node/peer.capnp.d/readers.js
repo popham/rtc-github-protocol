@@ -40,11 +40,8 @@ var file0 = require('../user.capnp.d/readers');
             Structure.prototype._defaults = {
                 candidate: (function() {
                     var Reader = reader.Text;
-                    var arena = allocator._fromBase64("AQAAAAoAAAAAAAAAAAAAAA==").asReader();
-                    return Reader._deref(arena, {
-                        segment: arena.getSegment(0),
-                        position: 0
-                    }, 0);
+                    var arena = allocator._fromBase64("AQAAAAMAAAA=").asReader();
+                    return Reader._deref(arena, arena._root(), 0);
                 })()
             };
             return Structure;
@@ -112,10 +109,7 @@ var file0 = require('../user.capnp.d/readers');
                 user: (function() {
                     var Reader = scope["0x95570979dae93deb"];
                     var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
-                    return Reader._deref(arena, {
-                        segment: arena.getSegment(0),
-                        position: 0
-                    }, 0);
+                    return Reader._deref(arena, arena._root(), 0);
                 })()
             };
             return Structure;
@@ -184,11 +178,8 @@ var file0 = require('../user.capnp.d/readers');
             Structure.prototype._defaults = {
                 sdp: (function() {
                     var Reader = reader.Text;
-                    var arena = allocator._fromBase64("AQAAAAoAAAAAAAAAAAAAAA==").asReader();
-                    return Reader._deref(arena, {
-                        segment: arena.getSegment(0),
-                        position: 0
-                    }, 0);
+                    var arena = allocator._fromBase64("AQAAAAMAAAA=").asReader();
+                    return Reader._deref(arena, arena._root(), 0);
                 })()
             };
             return Structure;
@@ -219,11 +210,8 @@ var file0 = require('../user.capnp.d/readers');
             Structure.prototype._defaults = {
                 sdp: (function() {
                     var Reader = reader.Text;
-                    var arena = allocator._fromBase64("AQAAAAoAAAAAAAAAAAAAAA==").asReader();
-                    return Reader._deref(arena, {
-                        segment: arena.getSegment(0),
-                        position: 0
-                    }, 0);
+                    var arena = allocator._fromBase64("AQAAAAMAAAA=").asReader();
+                    return Reader._deref(arena, arena._root(), 0);
                 })()
             };
             return Structure;
@@ -269,10 +257,7 @@ var file0 = require('../user.capnp.d/readers');
             ice: (function() {
                 var Reader = scope["0xf2ae185395b2f8ef"];
                 var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
-                return Reader._deref(arena, {
-                    segment: arena.getSegment(0),
-                    position: 0
-                }, 0);
+                return Reader._deref(arena, arena._root(), 0);
             })()
         };
         return Structure;
