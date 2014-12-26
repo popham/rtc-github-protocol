@@ -1,6 +1,6 @@
 {
   "name": "rtc-github-protocol",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Signaling protocol for rtc-github",
   "scripts": {
     "clean": "rm -rf node/*.capnp.d/ node/*.capnp amd/*.capnp.d/ amd/*.capnp",
