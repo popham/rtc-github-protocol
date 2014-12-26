@@ -1,35 +1,31 @@
-define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', './constants'], function(Allocator, reader, scope, constants) {
+define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope'], function(Allocator, reader, scope) {
     var readers = {};
     var allocator = new Allocator();
-    readers.User = (function() {
-        var Structure = scope["0x95570979dae93deb"];
-        Structure.prototype.getId = function() {
-            var position = this._dataSection + 0;
-            if (position < this._pointersSection) {
-                return reader.fields.int32(0, this._segment, position);
-            } else {
-                return 0;
-            }
-        };
-        Structure.prototype.getName = function() {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            if (pointer.position < this._end && !reader.isNull(pointer)) {
-                return reader.Text._deref(this._arena, pointer, this._depth + 1);
-            } else {
-                return this._defaults.name;
-            }
-        };
-        Structure.prototype._defaults = {
-            name: (function() {
+    (function(types, parentScope, allocator) {
+        var Structure = types["0x95570979dae93deb"];
+        Structure._PARENT = parentScope;
+        Structure.prototype._pointerDefaults = [];
+        (function(types, parentScope, allocator) {
+            var defaults = parentScope.prototype._pointerDefaults; /* id */
+            parentScope.prototype.getId = function() {
+                var position = this._dataSection + 0;
+                if (position < this._pointersSection) {
+                    return reader.fields.int32(0, this._segment, position);
+                } else {
+                    return 0;
+                }
+            }; /* name */
+            var f1 = reader.Text._FIELD;
+            parentScope.prototype.getName = f1.get(0, 0);
+            parentScope.prototype.hasName = f1.has(0);
+            defaults[0] = (function() {
                 var Reader = reader.Text;
-                var arena = allocator._fromBase64("AQAAAAMAAAA=").asReader();
+                var arena = allocator._fromBase64("AQAAAAoAAAAAAAAAAAAAAA==").asReader();
                 return Reader._deref(arena, arena._root(), 0);
-            })()
-        };
-        return Structure;
-    })();
+            })();
+            parentScope.prototype._floatDefaults = {};
+        })(types, Structure, allocator);
+        parentScope.User = Structure;
+    })(scope, readers, allocator);
     return readers;
 });

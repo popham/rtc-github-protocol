@@ -1,72 +1,31 @@
-define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './readers'], function(Allocator, builder, reader, scope, readers) {
-    var builders = {};
-    var allocator = new Allocator();
-    builders.User = (function() {
-        var Structure = scope["0x95570979dae93deb"];
-        Structure.prototype.getId = function() {
-            var position = this._dataSection + 0;
-            return reader.fields.int32(0, this._segment, position);
-        };
-        Structure.prototype.setId = function(value) {
-            builder.fields.int32(value, 0, this._segment, this._dataSection + 0);
-        };
-        Structure.prototype.getName = function() {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
+define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './readers'], function(builder, reader, scope, readers) {
+    var builders = {
+        _READER: readers
+    };
+    (function(types, parentScope) {
+        var Structure = types["0x95570979dae93deb"];
+        Structure._PARENT = parentScope;
+        Structure.prototype._pointerDefaults = Structure._READER.prototype._pointerDefaults;
+        (function(types, parentScope) {
+            parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
+            parentScope.prototype._floatDefaults = parentScope._READER.prototype._floatDefaults;
+            parentScope.prototype.getId = function() {
+                var position = this._dataSection + 0;
+                return reader.fields.int32(0, this._segment, position);
             };
-            if (reader.isNull(pointer)) {
-                builder.copy.pointer.setListPointer(this._defaults.name._arena, this._defaults.name._layout(), this._arena, pointer);
-            }
-            return builder.Text._deref(this._arena, pointer);
-        };
-        Structure.prototype.setName = function(value) {
-            var params = builder.Text._setParams(value);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
+            parentScope.prototype.setId = function(value) {
+                builder.fields.int32(value, 0, this._segment, this._dataSection + 0);
             };
-            builder.Text._set(this._arena, pointer, params);
-        };
-        Structure.prototype.initName = function(n) {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return builder.Text._init(this._arena, pointer, n + 1);
-        };
-        Structure.prototype.hasName = function() {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return (!reader.isNull(pointer));
-        };
-        Structure.prototype.adoptName = function(value) {
-            if (builder.Text._TYPE !== value._TYPE) {
-                throw new TypeError();
-            }
-            builder.Text._adopt(this._arena, {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            }, value);
-        };
-        Structure.prototype.disownName = function() {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            if (reader.isNull(pointer)) {
-                return builder.Text._initOrphan(this._arena);
-            } else {
-                var instance = builder.Text._deref(this._arena, pointer);
-                this._arena._zero(pointer, 8);
-                instance._isDisowned = true;
-                return instance;
-            }
-        };
-        Structure.prototype._defaults = Structure._READER.prototype._defaults;
-        return Structure;
-    })();
+            var f1 = builder.Text._FIELD;
+            parentScope.prototype.adoptName = f1.adopt(0);
+            parentScope.prototype.getName = f1.get(0, 0);
+            parentScope.prototype.hasName = f1.has(0);
+            parentScope.prototype.initName = f1.init(0);
+            parentScope.prototype.disownName = f1.disown(0);
+            parentScope.prototype.disownReadOnlyName = f1.disownReader(0);
+            parentScope.prototype.setName = f1.set(0);
+        })(types, Structure);
+        parentScope.User = Structure;
+    })(scope, builders);
     return builders;
 });

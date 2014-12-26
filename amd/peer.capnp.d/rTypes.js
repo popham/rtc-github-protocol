@@ -5,7 +5,7 @@ define(['capnp-js/reader/index'], function(reader) {
         AUDIO: 1,
         VIDEO: 2
     };
-    types["0xe5e90b52fd6c402e"] = reader.structure(7, 16, 16);
-    types["0xf2ae185395b2f8ef"] = reader.structure(7, 8, 8);
+    types['0xe5e90b52fd6c402e'] = reader.structure(7, 16, 16, '0xe5e90b52fd6c402e');
+    types['0xf2ae185395b2f8ef'] = reader.structure(7, 8, 8, '0xf2ae185395b2f8ef');
     return types;
 });

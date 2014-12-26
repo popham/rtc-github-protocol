@@ -1,134 +1,76 @@
-define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', './constants', '../user.capnp.d/readers', '../peer.capnp.d/readers'], function(Allocator, reader, scope, constants, file0, file1) {
+define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../user.capnp.d/readers', '../peer.capnp.d/readers'], function(Allocator, reader, scope) {
     var readers = {};
     var allocator = new Allocator();
-    readers.EMPTY_HOSTS_UPDATE = constants['0xfb7024301714f2d2'];
-    readers.Server = (function() {
-        var Structure = scope["0x898617f522cfa2ab"];
-        Structure.prototype.which = function() {
-            var position = this._dataSection + 0;
-            if (position < this._pointersSection) {
-                return reader.primitives.uint16(this._segment, position);
-            } else {
-                return 0;
-            }
-        };
-        Structure.SESSION = Structure.prototype.SESSION = 0;
-        Structure.prototype.isSession = function() {
-            return this.which() === 0;
-        };
-        Structure.Group_session = (function() {
-            var Structure = reader.group();
-            Structure.prototype.getUser = (function() {
-                var Reader = scope["0x95570979dae93deb"];
-                return function() {
-                    var pointer = {
-                        segment: this._segment,
-                        position: this._pointersSection + 0
-                    };
-                    if (pointer.position < this._end && !reader.isNull(pointer)) {
-                        return Reader._deref(this._arena, pointer, this._depth + 1);
-                    } else {
-                        return this._defaults.user;
-                    }
-                };
-            })();
-            Structure.prototype.hasUser = function() {
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                return pointer.position < this._end && !reader.isNull(pointer);
+    (function(types, parentScope, allocator) {
+        var arena = allocator._fromBase64("AQAAAAcAAAAAAAAAAQABAA==").asReader();
+        parentScope.EMPTY_HOSTS_UPDATE = parentScope.prototype.EMPTY_HOSTS_UPDATE = reader.lists.struct(["0x95570979dae93deb"])._deref(arena, arena._root(), 0);
+    })(scope, readers, allocator);
+    (function(types, parentScope, allocator) {
+        var Structure = types["0x898617f522cfa2ab"];
+        Structure._PARENT = parentScope;
+        Structure.prototype._pointerDefaults = [];
+        (function(types, parentScope, allocator) {
+            parentScope.prototype.which = function() {
+                var position = this._dataSection + 0;
+                if (position < this._pointersSection) {
+                    return reader.primitives.uint16(this._segment, position);
+                } else {
+                    return 0;
+                }
             };
-            Structure.prototype._defaults = {
-                user: (function() {
-                    var Reader = scope["0x95570979dae93deb"];
+            var defaults = parentScope.prototype._pointerDefaults; /* session */
+            parentScope.prototype.isSession = function() {
+                return this.which() === 0;
+            };
+            parentScope.SESSION = parentScope.prototype.SESSION = 0;
+            var G0 = reader.group(parentScope);
+            parentScope._G0 = G0;
+            G0.prototype._pointerDefaults = defaults;
+            (function(types, parentScope, allocator) {
+                var defaults = parentScope.prototype._pointerDefaults; /* user */
+                var f0 = types["0x95570979dae93deb"]._FIELD;
+                parentScope.prototype.getUser = f0.get(0, 0);
+                parentScope.prototype.hasUser = f0.has(0);
+                defaults[0] = (function() {
+                    var Reader = types["0x95570979dae93deb"];
                     var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
                     return Reader._deref(arena, arena._root(), 0);
-                })()
-            };
-            return Structure;
-        })();
-        Structure.prototype.getSession = function() {
-            if (!this.isSession()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            return new Structure.Group_session(this);
-        };
-        Structure.HOSTS_UPDATE = Structure.prototype.HOSTS_UPDATE = 1;
-        Structure.prototype.isHostsUpdate = function() {
-            return this.which() === 1;
-        };
-        Structure.prototype.getHostsUpdate = (function() {
-            var Reader = reader.lists.structure(scope['0x95570979dae93deb']);
-            return function() {
-                if (!this.isHostsUpdate()) {
+                })();
+                parentScope.prototype._floatDefaults = {};
+            })(types, G0, allocator);
+            parentScope.prototype.getSession = function() {
+                if (!this.isSession()) {
                     throw new Error("Attempted to access an inactive union member");
                 }
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                if (pointer.position < this._end && !reader.isNull(pointer)) {
-                    return Reader._deref(this._arena, pointer, this._depth + 1);
-                } else {
-                    return this._defaults.hostsUpdate;
-                }
+                return new G0(this);
+            }; /* hostsUpdate */
+            parentScope.prototype.isHostsUpdate = function() {
+                return this.which() === 1;
             };
-        })();
-        Structure.prototype.hasHostsUpdate = function() {
-            if (!this.isHostsUpdate()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
+            parentScope.HOSTS_UPDATE = parentScope.prototype.HOSTS_UPDATE = 1;
+            var f1 = reader.lists.struct(types["0x95570979dae93deb"])._FIELD;
+            parentScope.prototype.getHostsUpdate = f1.unionGet(1, 0, 0);
+            parentScope.prototype.hasHostsUpdate = f1.unionHas(1, 0); /* peer */
+            parentScope.prototype.isPeer = function() {
+                return this.which() === 2;
             };
-            return pointer.position < this._end && !reader.isNull(pointer);
-        };
-        Structure.PEER = Structure.prototype.PEER = 2;
-        Structure.prototype.isPeer = function() {
-            return this.which() === 2;
-        };
-        Structure.prototype.getPeer = (function() {
-            var Reader = scope["0xe5e90b52fd6c402e"];
-            return function() {
-                if (!this.isPeer()) {
-                    throw new Error("Attempted to access an inactive union member");
-                }
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                if (pointer.position < this._end && !reader.isNull(pointer)) {
-                    return Reader._deref(this._arena, pointer, this._depth + 1);
-                } else {
-                    return this._defaults.peer;
-                }
-            };
-        })();
-        Structure.prototype.hasPeer = function() {
-            if (!this.isPeer()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return pointer.position < this._end && !reader.isNull(pointer);
-        };
-        Structure.prototype._defaults = {
-            hostsUpdate: (function() {
-                var Reader = reader.lists.structure(scope['0x95570979dae93deb']);
+            parentScope.PEER = parentScope.prototype.PEER = 2;
+            var f2 = types["0xe5e90b52fd6c402e"]._FIELD;
+            parentScope.prototype.getPeer = f2.unionGet(2, 0, 0);
+            parentScope.prototype.hasPeer = f2.unionHas(2, 0);
+            defaults[0] = (function() {
+                var Reader = reader.lists.struct(types["0x95570979dae93deb"]);
                 var arena = allocator._fromBase64("AQAAAAAAAAA=").asReader();
                 return Reader._deref(arena, arena._root(), 0);
-            })(),
-            peer: (function() {
-                var Reader = scope["0xe5e90b52fd6c402e"];
+            })();
+            defaults[0] = (function() {
+                var Reader = types["0xe5e90b52fd6c402e"];
                 var arena = allocator._fromBase64("AAAAAAAAAAA=").asReader();
                 return Reader._deref(arena, arena._root(), 0);
-            })()
-        };
-        return Structure;
-    })();
+            })();
+            parentScope.prototype._floatDefaults = {};
+        })(types, Structure, allocator);
+        parentScope.Server = Structure;
+    })(scope, readers, allocator);
     return readers;
 });

@@ -1,271 +1,82 @@
-define(['capnp-js/builder/Allocator', 'capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './readers', '../user.capnp.d/builders', '../peer.capnp.d/builders'], function(Allocator, builder, reader, scope, readers, file0, file1) {
-    var builders = {};
-    var allocator = new Allocator();
-    builders.EMPTY_HOSTS_UPDATE = readers.EMPTY_HOSTS_UPDATE;
-    builders.Server = (function() {
-        var Structure = scope["0x898617f522cfa2ab"];
-        Structure.prototype.which = function() {
-            return reader.primitives.uint16(this._segment, this._dataSection + 0);
-        };
-        Structure.prototype._setWhich = function(discriminant) {
-            builder.zero.pointer(this._arena, {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            });
-            var position = this._dataSection + 0;
-            builder.primitives.uint16(discriminant, this._segment, position);
-        };
-        Structure.prototype.isSession = function() {
-            return this.which() === 0;
-        };
-        Structure.SESSION = Structure.prototype.SESSION = 0;
-        Structure.Group_session = (function(Parent) {
-            var Structure = builder.group(Parent._READER.Group_session);
-            var Builder_user = scope["0x95570979dae93deb"];
-            Structure.prototype.initUser = function() {
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                return Builder_user._init(this._arena, pointer, this._depth + 1);
+define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './readers', '../user.capnp.d/builders', '../peer.capnp.d/builders'], function(builder, reader, scope, readers, file0, file1) {
+    var builders = {
+        _READER: readers
+    };
+    (function(types, parentScope) {
+        parentScope.EMPTY_HOSTS_UPDATE = parentScope.prototype.EMPTY_HOSTS_UPDATE = parentScope._READER.EMPTY_HOSTS_UPDATE;
+    })(scope, builders);
+    (function(types, parentScope) {
+        var Structure = types["0x898617f522cfa2ab"];
+        Structure._PARENT = parentScope;
+        Structure.prototype._pointerDefaults = Structure._READER.prototype._pointerDefaults;
+        (function(types, parentScope) {
+            parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
+            parentScope.prototype._floatDefaults = parentScope._READER.prototype._floatDefaults;
+            parentScope.prototype.which = function() {
+                return reader.primitives.uint16(this._segment, this._dataSection + 0);
             };
-            Structure.prototype.getUser = function() {
-                var pointer = {
+            parentScope.prototype._setWhich = function(discr) {
+                builder.zero.pointer(this._arena, {
                     segment: this._segment,
                     position: this._pointersSection + 0
-                };
-                if (reader.isNull(pointer)) {
-                    builder.copy.pointer.setStructPointer(this._defaults.user._arena, this._defaults.user._layout(), this._arena, pointer);
+                });
+                var position = this._dataSection + 0;
+                builder.primitives.uint16(discr, this._segment, position);
+            };
+            parentScope.prototype.isSession = function() {
+                return this.which() === 0;
+            };
+            parentScope.SESSION = parentScope.prototype.SESSION = 0;
+            var G0 = builder.group(parentScope._READER._G0);
+            G0.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
+            (function(types, parentScope) {
+                parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
+                parentScope.prototype._floatDefaults = parentScope._READER.prototype._floatDefaults;
+                var f0 = types["0x95570979dae93deb"]._FIELD;
+                parentScope.prototype.adoptUser = f0.adopt(0);
+                parentScope.prototype.getUser = f0.get(0, 0);
+                parentScope.prototype.hasUser = f0.has(0);
+                parentScope.prototype.initUser = f0.init(0);
+                parentScope.prototype.disownUser = f0.disown(0);
+                parentScope.prototype.disownReadOnlyUser = f0.disownReader(0);
+                parentScope.prototype.setUser = f0.set(0);
+            })(types, G0);
+            parentScope.prototype.getSession = function() {
+                if (!this.isSession()) {
+                    throw new Error("Attempted to access an inactive union member");
                 }
-                return Builder_user._deref(this._arena, pointer);
+                return new G0(this);
             };
-            Structure.prototype.setUser = function(value) {
-                if (Builder_user._TYPE !== value._TYPE) throw new TypeError();
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                Builder_user._set(this._arena, pointer, value);
+            parentScope.prototype.initSession = function() {
+                this._setWhich(0);
+                return new G0(this);
             };
-            Structure.prototype.adoptUser = function(value) {
-                if (Builder_user._TYPE !== value._TYPE) throw new TypeError();
-                if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                Builder_user._adopt(this._arena, pointer, value);
+            parentScope.prototype.isHostsUpdate = function() {
+                return this.which() === 1;
             };
-            Structure.prototype.disownUser = function() {
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                if (reader.isNull(pointer)) {
-                    return Builder_user._initOrphan(this._arena);
-                } else {
-                    var instance = Builder_user._deref(this._arena, pointer);
-                    this._arena._zero(pointer, 8);
-                    instance._isOrphan = true;
-                    return instance;
-                }
+            parentScope.HOSTS_UPDATE = parentScope.prototype.HOSTS_UPDATE = 1;
+            var f1 = builder.lists.struct(types["0x95570979dae93deb"])._FIELD;
+            parentScope.prototype.adoptHostsUpdate = f1.unionAdopt(1, 0);
+            parentScope.prototype.getHostsUpdate = f1.unionGet(1, 0, 0);
+            parentScope.prototype.hasHostsUpdate = f1.unionHas(1, 0);
+            parentScope.prototype.initHostsUpdate = f1.unionInit(1, 0);
+            parentScope.prototype.disownHostsUpdate = f1.unionDisown(1, 0);
+            parentScope.prototype.disownReadOnlyHostsUpdate = f1.unionDisownReader(1, 0);
+            parentScope.prototype.setHostsUpdate = f1.unionSet(1, 0);
+            parentScope.prototype.isPeer = function() {
+                return this.which() === 2;
             };
-            Structure.prototype.disownAsReaderUser = function() {
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                var instance = Builder_user._READER._deref(this._arena, pointer);
-                this._arena._zero(pointer, 8);
-                instance._isOrphan = true;
-                return instance;
-            };
-            Structure.prototype.hasUser = function() {
-                var pointer = {
-                    segment: this._segment,
-                    position: this._pointersSection + 0
-                };
-                return (!reader.isNull(pointer));
-            };
-            Structure.prototype._defaults = Structure._READER.prototype._defaults;
-            return Structure;
-        })(Structure);
-        Structure.prototype.getSession = function() {
-            if (!this.isSession()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            return new Structure.Group_session(this);
-        };
-        Structure.prototype.initSession = function() {
-            this._setWhich(0);
-            return new Structure.Group_session(this);
-        };
-        Structure.prototype.isHostsUpdate = function() {
-            return this.which() === 1;
-        };
-        Structure.HOSTS_UPDATE = Structure.prototype.HOSTS_UPDATE = 1;
-        var Builder_hostsUpdate = builder.lists.structure(scope["0x95570979dae93deb"]);
-        Structure.prototype.initHostsUpdate = function(n) {
-            this._setWhich(1);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return Builder_hostsUpdate._init(this._arena, pointer, n);
-        };
-        Structure.prototype.getHostsUpdate = function() {
-            if (!this.isHostsUpdate()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            if (reader.isNull(pointer)) {
-                builder.copy.pointer.setListPointer(this._defaults.hostsUpdate._arena, this._defaults.hostsUpdate._layout(), this._arena, pointer);
-            }
-            return Builder_hostsUpdate._deref(this._arena, pointer);
-        };
-        Structure.prototype.setHostsUpdate = function(value) {
-            if (Builder_hostsUpdate._TYPE !== value._TYPE) throw new TypeError();
-            this._setWhich(1);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            Builder_hostsUpdate._set(this._arena, pointer, value);
-        };
-        Structure.prototype.adoptHostsUpdate = function(value) {
-            if (Builder_hostsUpdate._TYPE !== value._TYPE) throw new TypeError();
-            if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
-            this._setWhich(1);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            Builder_hostsUpdate._adopt(this._arena, pointer, value);
-        };
-        Structure.prototype.disownHostsUpdate = function() {
-            if (!this.isHostsUpdate()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            if (reader.isNull(pointer)) {
-                return Builder_hostsUpdate._initOrphan(this._arena);
-            } else {
-                var instance = Builder_hostsUpdate._deref(this._arena, pointer);
-                this._arena._zero(pointer, 8);
-                instance._isOrphan = true;
-                return instance;
-            }
-        };
-        Structure.prototype.disownAsReaderHostsUpdate = function() {
-            if (!this.isHostsUpdate()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            var instance = Builder_hostsUpdate._READER._deref(this._arena, pointer);
-            this._arena._zero(pointer, 8);
-            instance._isOrphan = true;
-            return instance;
-        };
-        Structure.prototype.hasHostsUpdate = function() {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return (this.isHostsUpdate() && !reader.isNull(pointer));
-        };
-        Structure.prototype.isPeer = function() {
-            return this.which() === 2;
-        };
-        Structure.PEER = Structure.prototype.PEER = 2;
-        var Builder_peer = scope["0xe5e90b52fd6c402e"];
-        Structure.prototype.initPeer = function() {
-            this._setWhich(2);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return Builder_peer._init(this._arena, pointer, this._depth + 1);
-        };
-        Structure.prototype.getPeer = function() {
-            if (!this.isPeer()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            if (reader.isNull(pointer)) {
-                builder.copy.pointer.setStructPointer(this._defaults.peer._arena, this._defaults.peer._layout(), this._arena, pointer);
-            }
-            return Builder_peer._deref(this._arena, pointer);
-        };
-        Structure.prototype.setPeer = function(value) {
-            if (Builder_peer._TYPE !== value._TYPE) throw new TypeError();
-            this._setWhich(2);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            Builder_peer._set(this._arena, pointer, value);
-        };
-        Structure.prototype.adoptPeer = function(value) {
-            if (Builder_peer._TYPE !== value._TYPE) throw new TypeError();
-            if (!value._isOrphan) throw new ValueError('Cannot adopt non-orphans');
-            this._setWhich(2);
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            Builder_peer._adopt(this._arena, pointer, value);
-        };
-        Structure.prototype.disownPeer = function() {
-            if (!this.isPeer()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            if (reader.isNull(pointer)) {
-                return Builder_peer._initOrphan(this._arena);
-            } else {
-                var instance = Builder_peer._deref(this._arena, pointer);
-                this._arena._zero(pointer, 8);
-                instance._isOrphan = true;
-                return instance;
-            }
-        };
-        Structure.prototype.disownAsReaderPeer = function() {
-            if (!this.isPeer()) {
-                throw new Error("Attempted to access an inactive union member");
-            }
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            var instance = Builder_peer._READER._deref(this._arena, pointer);
-            this._arena._zero(pointer, 8);
-            instance._isOrphan = true;
-            return instance;
-        };
-        Structure.prototype.hasPeer = function() {
-            var pointer = {
-                segment: this._segment,
-                position: this._pointersSection + 0
-            };
-            return (this.isPeer() && !reader.isNull(pointer));
-        };
-        Structure.prototype._defaults = Structure._READER.prototype._defaults;
-        return Structure;
-    })();
+            parentScope.PEER = parentScope.prototype.PEER = 2;
+            var f2 = types["0xe5e90b52fd6c402e"]._FIELD;
+            parentScope.prototype.adoptPeer = f2.unionAdopt(2, 0);
+            parentScope.prototype.getPeer = f2.unionGet(2, 0, 0);
+            parentScope.prototype.hasPeer = f2.unionHas(2, 0);
+            parentScope.prototype.initPeer = f2.unionInit(2, 0);
+            parentScope.prototype.disownPeer = f2.unionDisown(2, 0);
+            parentScope.prototype.disownReadOnlyPeer = f2.unionDisownReader(2, 0);
+            parentScope.prototype.setPeer = f2.unionSet(2, 0);
+        })(types, Structure);
+        parentScope.Server = Structure;
+    })(scope, builders);
     return builders;
 });
