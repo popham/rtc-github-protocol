@@ -19,6 +19,7 @@
     "url": "https://github.com/popham/rtc-github-protocol/issues"
   },
   "homepage": "https://github.com/popham/rtc-github-protocol",
+  "private": true,
   "devDependencies": {
     "capnp-js-plugin": "0.2.5",
     "nfy": "0.0.1"
