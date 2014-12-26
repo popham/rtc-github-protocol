@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/popham/rtc-github-protocol",
   "devDependencies": {
-    "capnp-js-plugin": "0.1.4",
+    "capnp-js-plugin": "0.2.5",
     "nfy": "0.0.1"
   }
 }
