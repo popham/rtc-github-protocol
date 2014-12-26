@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Signaling protocol for rtc-github",
   "scripts": {
-    "clean": "rm -rf node/*.capnp.d/ node/*.capnp amd/*.capnp.d/ amd/*.capnp",
-    "compileMySchema": "capnp compile -ojs:amd *.capnp & cp *.capnp amd & wait",
-    "nfy": "nfy --output=node --src-prefix=amd amd/*.capnp.d/*.js & cp *.capnp node & wait",
+    "clean": "rm -rf node/*.capnp.d/ amd/*.capnp.d/",
+    "compileMySchema": "capnp compile -ojs:amd *.capnp",
+    "nfy": "nfy --output=node --src-prefix=amd amd/*.capnp.d/*.js",
     "build": "npm run rebuild",
     "rebuild": "npm run clean && npm run compileMySchema && npm run nfy"
   },
