@@ -10,6 +10,8 @@
   ],
   "private": true,
   "dependencies": {
-    "capnp-js": "~0.2.11"
+    "capnp-js": "~0.2.11",
+    "js-signals": "~1.0.0",
+    "when": "~3.5.0"
   }
 }
