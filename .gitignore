@@ -1,3 +1,4 @@
 /node_modules/
 /node/*
 !/node/package.json
+/polyfill.js

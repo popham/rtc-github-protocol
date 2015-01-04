@@ -3,11 +3,13 @@
   "version": "0.0.2",
   "description": "Signaling protocol for rtc-github",
   "scripts": {
-    "clean": "rm -rf node/*.capnp.d/ amd/*.capnp.d/",
+    "clean": "shopt -s globstar && rm -rf polyfill.js node/*.js node/*.capnp* amd/*.js amd/*.capnp*",
     "compileMySchema": "capnp compile -ojs:amd *.capnp",
     "nfy": "shopt -s globstar && nfy --output=node --src-prefix=amd amd/**/*.js",
-    "build": "npm run rebuild",
-    "rebuild": "npm run clean && (npm run compileMySchema & cp toCandidate.js amd & wait) && npm run nfy"
+    "polyfill": "cat polyfill/*.js | uglifyjs -o polyfill.js",
+    "cp": "cp -t amd *.capnp toCandidate.js polyfill.js & cp -t node *.capnp & wait",
+    "build": "(npm run compileMySchema & (npm run polyfill && npm run cp) & wait) && npm run nfy",
+    "rebuild": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
   "private": true,
   "devDependencies": {
     "capnp-js-plugin": "0.2.11",
-    "nfy": "0.0.4"
+    "nfy": "0.0.4",
+    "uglifyjs": "^2.3.6"
   }
 }
