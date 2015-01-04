@@ -1,13 +1,13 @@
 {
   "name": "rtc-github-protocol",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Signaling protocol for rtc-github",
   "scripts": {
     "clean": "rm -rf node/*.capnp.d/ amd/*.capnp.d/",
     "compileMySchema": "capnp compile -ojs:amd *.capnp",
-    "nfy": "nfy --output=node --src-prefix=amd amd/*.capnp.d/*.js",
+    "nfy": "shopt -s globstar && nfy --output=node --src-prefix=amd amd/**/*.js",
     "build": "npm run rebuild",
-    "rebuild": "npm run clean && npm run compileMySchema && npm run nfy"
+    "rebuild": "npm run clean && (npm run compileMySchema & cp toCandidate.js amd & wait) && npm run nfy"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/popham/rtc-github-protocol",
   "private": true,
   "devDependencies": {
-    "capnp-js-plugin": "0.2.5",
-    "nfy": "0.0.1"
+    "capnp-js-plugin": "0.2.11",
+    "nfy": "0.0.4"
   }
 }
