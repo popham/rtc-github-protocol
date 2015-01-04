@@ -1,6 +1,6 @@
 {
   "name": "rtc-github-protocol",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Signaling protocol for rtc-github",
   "scripts": {
     "clean": "shopt -s globstar && rm -rf node/*.capnp* amd/polyfill.js amd/*.capnp*",
