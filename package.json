@@ -3,12 +3,12 @@
   "version": "0.0.3",
   "description": "Signaling protocol for rtc-github",
   "scripts": {
-    "clean": "shopt -s globstar && rm -rf polyfill.js node/*.js node/*.capnp* amd/*.js amd/*.capnp*",
+    "clean": "shopt -s globstar && rm -rf node/*.capnp* amd/polyfill.js amd/*.capnp*",
     "compileMySchema": "capnp compile -ojs:amd *.capnp",
-    "nfy": "shopt -s globstar && nfy --output=node --src-prefix=amd amd/**/*.js",
-    "polyfill": "cat polyfill/*.js | uglifyjs -o polyfill.js",
-    "cp": "cp -t amd *.capnp toCandidate.js polyfill.js & cp -t node *.capnp & wait",
-    "build": "(npm run compileMySchema & (npm run polyfill && npm run cp) & wait) && npm run nfy",
+    "nfy": "shopt -s globstar && nfy --output=node --src-prefix=amd amd/*.capnp.d/*",
+    "polyfill": "cat polyfill/*.js | uglifyjs -o amd/polyfill.js",
+    "cpSchemas": "cp -t amd *.capnp & cp -t node *.capnp & wait",
+    "build": "npm run compileMySchema && npm run nfy && npm run polyfill && npm run cpSchemas",
     "rebuild": "npm run clean && npm run build"
   },
   "repository": {
