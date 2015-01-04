@@ -20,7 +20,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../p
             };
             parentScope.SERVICE = parentScope.prototype.SERVICE = 0;
             var G0 = reader.group(parentScope);
-            parentScope._G0 = G0;
+            parentScope.service = G0;
             G0.prototype._pointerDefaults = defaults;
             (function(types, parentScope, allocator) {
                 var defaults = parentScope.prototype._pointerDefaults; /* isOffering */

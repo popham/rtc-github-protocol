@@ -24,7 +24,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../u
             };
             parentScope.SESSION = parentScope.prototype.SESSION = 0;
             var G0 = reader.group(parentScope);
-            parentScope._G0 = G0;
+            parentScope.session = G0;
             G0.prototype._pointerDefaults = defaults;
             (function(types, parentScope, allocator) {
                 var defaults = parentScope.prototype._pointerDefaults; /* user */

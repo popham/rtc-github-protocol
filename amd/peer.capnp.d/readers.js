@@ -53,7 +53,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../u
             };
             var defaults = parentScope.prototype._pointerDefaults; /* source */
             var G0 = reader.group(parentScope);
-            parentScope._G0 = G0;
+            parentScope.source = G0;
             G0.prototype._pointerDefaults = defaults;
             (function(types, parentScope, allocator) {
                 parentScope.prototype.which = function() {
@@ -93,7 +93,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../u
                 return new G0(this);
             }; /* target */
             var G1 = reader.group(parentScope);
-            parentScope._G1 = G1;
+            parentScope.target = G1;
             G1.prototype._pointerDefaults = defaults;
             (function(types, parentScope, allocator) {
                 parentScope.prototype.which = function() {
@@ -140,7 +140,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../u
             };
             parentScope.OFFER = parentScope.prototype.OFFER = 0;
             var G2 = reader.group(parentScope);
-            parentScope._G2 = G2;
+            parentScope.offer = G2;
             G2.prototype._pointerDefaults = defaults;
             (function(types, parentScope, allocator) {
                 var defaults = parentScope.prototype._pointerDefaults; /* sdp */
@@ -165,7 +165,7 @@ define(['capnp-js/builder/Allocator', 'capnp-js/reader/index', './rScope', '../u
             };
             parentScope.ANSWER = parentScope.prototype.ANSWER = 1;
             var G3 = reader.group(parentScope);
-            parentScope._G3 = G3;
+            parentScope.answer = G3;
             G3.prototype._pointerDefaults = defaults;
             (function(types, parentScope, allocator) {
                 var defaults = parentScope.prototype._pointerDefaults; /* sdp */

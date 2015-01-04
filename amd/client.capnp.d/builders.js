@@ -25,7 +25,8 @@ define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './reader
                 return this.which() === 0;
             };
             parentScope.SERVICE = parentScope.prototype.SERVICE = 0;
-            var G0 = builder.group(parentScope._READER._G0);
+            var G0 = builder.group(parentScope._READER.service);
+            parentScope.service = G0;
             G0.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
             (function(types, parentScope) {
                 parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;

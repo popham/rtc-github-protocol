@@ -55,7 +55,8 @@ define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './reader
                 var position = this._dataSection + 8;
                 builder.primitives.uint16(discr, this._segment, position);
             };
-            var G0 = builder.group(parentScope._READER._G0);
+            var G0 = builder.group(parentScope._READER.source);
+            parentScope.source = G0;
             G0.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
             (function(types, parentScope) {
                 parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
@@ -103,7 +104,8 @@ define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './reader
             parentScope.prototype.initSource = function() {
                 return new G0(this);
             };
-            var G1 = builder.group(parentScope._READER._G1);
+            var G1 = builder.group(parentScope._READER.target);
+            parentScope.target = G1;
             G1.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
             (function(types, parentScope) {
                 parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
@@ -155,7 +157,8 @@ define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './reader
                 return this.which() === 0;
             };
             parentScope.OFFER = parentScope.prototype.OFFER = 0;
-            var G2 = builder.group(parentScope._READER._G2);
+            var G2 = builder.group(parentScope._READER.offer);
+            parentScope.offer = G2;
             G2.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
             (function(types, parentScope) {
                 parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
@@ -183,7 +186,8 @@ define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './reader
                 return this.which() === 1;
             };
             parentScope.ANSWER = parentScope.prototype.ANSWER = 1;
-            var G3 = builder.group(parentScope._READER._G3);
+            var G3 = builder.group(parentScope._READER.answer);
+            parentScope.answer = G3;
             G3.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
             (function(types, parentScope) {
                 parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;

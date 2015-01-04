@@ -27,7 +27,8 @@ define(['capnp-js/builder/index', 'capnp-js/reader/index', './bScope', './reader
                 return this.which() === 0;
             };
             parentScope.SESSION = parentScope.prototype.SESSION = 0;
-            var G0 = builder.group(parentScope._READER._G0);
+            var G0 = builder.group(parentScope._READER.session);
+            parentScope.session = G0;
             G0.prototype._pointerDefaults = parentScope.prototype._pointerDefaults;
             (function(types, parentScope) {
                 parentScope.prototype._pointerDefaults = parentScope._READER.prototype._pointerDefaults;
